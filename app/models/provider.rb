@@ -1,5 +1,5 @@
-# class Provider < ActiveRecord::Base
-#   enum kinds: { whatsapp: 'whatsapp', viber: 'viber', telegramm: 'telegramm' }
+class Provider < ActiveRecord::Base
+  enum kind: %i[whats_app viber telegramm]
 
-#   validates :kinds, uniqueness: true # добавил уникальный индекс в БД
-# end
+  validates :kind, uniqueness: true
+end

@@ -17,21 +17,32 @@ ActiveRecord::Schema.define(version: 20190427074218) do
   enable_extension "plpgsql"
 
   create_table "messages", force: :cascade do |t|
-    t.integer  "users_provider_id", null: false
+    t.integer  "providers_user_id", null: false
     t.string   "body",              null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "messages", ["users_provider_id", "body"], name: "index_messages_on_users_provider_id_and_body", unique: true, using: :btree
+  add_index "messages", ["providers_user_id", "body"], name: "index_messages_on_providers_user_id_and_body", unique: true, using: :btree
 
   create_table "providers", force: :cascade do |t|
+    t.string   "slug",       null: false
     t.integer  "kind",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "providers", ["kind"], name: "index_providers_on_kind", unique: true, using: :btree
+
+  create_table "providers_users", force: :cascade do |t|
+    t.integer  "provider_id", null: false
+    t.integer  "user_id",     null: false
+    t.string   "username",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "providers_users", ["provider_id", "user_id"], name: "index_providers_users_on_provider_id_and_user_id", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -52,15 +63,5 @@ ActiveRecord::Schema.define(version: 20190427074218) do
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-
-  create_table "users_providers", force: :cascade do |t|
-    t.integer  "user_id",     null: false
-    t.integer  "provider_id", null: false
-    t.string   "username",    null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "users_providers", ["user_id", "provider_id"], name: "index_users_providers_on_user_id_and_provider_id", unique: true, using: :btree
 
 end

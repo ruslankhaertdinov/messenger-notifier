@@ -1,19 +1,26 @@
 module V1
-  class SessionsController < ApplicationController
-    # def create
-      # user = AuthenticateUser.call(warden: warden).user
-      # respond_with(user, serializer: SessionSerializer)
-    # end
-
+  class MessagesController < ApplicationController
     def create
-      result = SendMessages.call(params: strong_params)
+      byebug
+      result = SendMessage.call(params: strong_params)
+      byebug
+      if result.success?
+        render json: { result: 'success' }
+      else
+        render json: { result: 'error' }
+      end
     end
 
     private
 
     def strong_params
-      # заглушка
-      params
+      # {
+      #   users: ['user1@example.com', 'user2@example.com'],
+      #   message: 'Оплатить по счёту',
+      #   providers: ['whatsapp', 'viber'],
+      #   send_at: '2019-04-24T21:33:07+03:00'
+      # }
+      params.permit(:message, :send_at, users: [], providers: [])
     end
   end
 end
