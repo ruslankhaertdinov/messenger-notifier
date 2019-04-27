@@ -2,7 +2,13 @@ require 'rails_helper'
 
 describe SendMessage do
   let(:interactor) { described_class.call(params) }
-  let(:user) { create(:user) }
+  let!(:user) { create(:user) }
+  let!(:provider1) { create(:provider, :whats_app) }
+  let!(:provider2) { create(:provider, :viber) }
+  let!(:provider3) { create(:provider, :telegramm) }
+  let!(:providers_user1) { create(:providers_user, user: user, provider: provider1, username: '@username1') }
+  let!(:providers_user2) { create(:providers_user, user: user, provider: provider2, username: '@username2') }
+  let!(:providers_user3) { create(:providers_user, user: user, provider: provider3, username: '@username3') }
   let(:params) do
     {
       message: 'Hi!',
@@ -11,13 +17,11 @@ describe SendMessage do
     }
   end
 
-  before do
-    allow(WhatsApp::SendMessage).to receive_message_chain(:new, :call)
-    allow(Viber::SendMessage).to receive_message_chain(:new, :call)
-    allow(Telegramm::SendMessage).to receive_message_chain(:new, :call)
-
-  end
-
   it 'отправит уведомления' do
+    expect(WhatsApp::SendMessage).to receive_message_chain(:new, :call)
+    expect(Viber::SendMessage).to receive_message_chain(:new, :call)
+    expect(Telegramm::SendMessage).to receive_message_chain(:new, :call)
+
+    interactor
   end
 end

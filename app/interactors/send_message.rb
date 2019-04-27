@@ -1,37 +1,32 @@
 class SendMessage
   include Interactor
 
-  delegate :params, to: :context
+  delegate :message, :send_at, to: :context
 
   def call
-    byebug
-    send_message
+    send_messages
   end
 
   private
 
-  def send_message
+  def send_messages
     users.each do |user|
-      byebug
       user.providers.where(id: providers.ids).each do |provider|
-        byebug
-        send_message(provider.kind, user.username_for(provider), params[:message])
+        send_message(provider.kind, user.username_for(provider), message)
       end
     end
   end
 
   def users
-    User.where(email: params[:users])
+    @users ||= User.where(email: context[:users])
   end
 
   def providers
-    Provider.where(slug: params[:providers])
+    @providers ||= Provider.where(slug: context[:providers])
   end
 
   def send_message(kind, username, message)
-    byebug
     klass = "#{ kind }/send_message".classify.constantize
-    byebug
-    klass.new(username, message).send_message
+    klass.new(username, message).call
   end
 end
