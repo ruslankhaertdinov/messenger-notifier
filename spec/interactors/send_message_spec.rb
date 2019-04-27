@@ -18,9 +18,9 @@ describe SendMessage do
   end
 
   it 'отправит уведомления' do
-    expect(WhatsApp::SendMessage).to receive_message_chain(:new, :call)
-    expect(Viber::SendMessage).to receive_message_chain(:new, :call)
-    expect(Telegramm::SendMessage).to receive_message_chain(:new, :call)
+    [WhatsApp::SendMessage, Viber::SendMessage, Telegramm::SendMessage].each do |klass|
+      expect(klass).to receive_message_chain(:new, :call)
+    end
 
     interactor
   end
