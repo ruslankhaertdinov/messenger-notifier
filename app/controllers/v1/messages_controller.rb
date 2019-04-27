@@ -1,13 +1,11 @@
 module V1
   class MessagesController < ApplicationController
     def create
-      byebug
       result = SendMessage.call(params: strong_params)
-      byebug
       if result.success?
-        render json: { result: 'success' }
+        render json: { success: 'true' }
       else
-        render json: { result: 'error' }
+        render json: { success: 'false', errors: [result.errors] }
       end
     end
 

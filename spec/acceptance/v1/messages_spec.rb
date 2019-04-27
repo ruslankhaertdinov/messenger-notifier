@@ -25,13 +25,25 @@ resource "Messages" do
       }
     end
 
-    # parameter :email, "Email", required: true
-    # parameter :password, "Password", required: true
+    parameter :message, 'Сообщение', type: :string, required: true
+    parameter :send_at, 'Желаемое время отправки (отправляется немедленно, если не передано)',
+                        type: :string,
+                        comment: 'В формате iso8601, например: 2019-04-27T14:08:25+03:00'
+    parameter :providers, 'Список мессенджеров',
+                          type: :array,
+                          comment: 'Пример: [whats_app, viber, telegramm]',
+                          required: true
+    parameter :users, 'Список эл. адресов пользователей',
+                      type: :array,
+                      comment: 'Пример: [user1@example.com, user2@example.com]',
+                      required: true
 
-
-    example_request "Send message with valid params" do
-      # expect(response["user"]).to be_a_session_representation
-      puts response_body
+    example_request "Успешная отправка" do
+      expect(response_body['success']).to eq('success')
     end
+
+    # example_request "Невалидные параметры" do
+    #   expect(response_body['success']).to eq('error')
+    # end
   end
 end

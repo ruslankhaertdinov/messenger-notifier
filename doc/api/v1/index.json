@@ -11,6 +11,16 @@
       ]
     },
     {
+      "name": "Messages",
+      "examples": [
+        {
+          "description": "Успешная отправка",
+          "link": "messages/успешная_отправка.json",
+          "groups": "all"
+        }
+      ]
+    },
+    {
       "name": "Sessions",
       "examples": [
         {
