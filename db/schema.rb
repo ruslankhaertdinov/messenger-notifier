@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20190428060635) do
     t.datetime "updated_at"
   end
 
+  add_index "user_messages", ["status"], name: "index_user_messages_on_status", using: :btree
   add_index "user_messages", ["uuid"], name: "index_user_messages_on_uuid", using: :hash
 
   create_table "users", force: :cascade do |t|

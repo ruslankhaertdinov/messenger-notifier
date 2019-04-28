@@ -9,11 +9,20 @@ describe SendMessage do
   end
 
   describe '#call' do
+    context 'сообщение не в очереди на отправку' do
+      let(:result) { true }
+
+      it 'не будет отправлять сообщение' do
+        expect(WhatsApp::ApiStub).not_to have_received(:new)
+      end
+    end
+
     context 'успешный результат' do
       let(:result) { true }
 
       it 'обновит статус сообщения' do
         expect { service.call }.to change { user_message.reload.status }.from('queued').to('sent')
+        expect(WhatsApp::ApiStub).to have_received(:new)
         expect(user_message.retry_count).to eq(0)
       end
     end
@@ -31,6 +40,7 @@ describe SendMessage do
         service.call
         user_message.reload
 
+        expect(WhatsApp::ApiStub).to have_received(:new)
         expect(user_message).to be_queued
         expect(user_message.retry_count).to eq(SendMessage::MAX_RETRY_COUNT)
 

@@ -11,6 +11,8 @@ class SendMessage
   end
 
   def call
+    return unless user_message.queued?
+
     response == true ? act_on_success : act_on_failure
   end
 
@@ -30,7 +32,7 @@ class SendMessage
     message_to_logger('not sent')
 
     if user_message.retry_count < MAX_RETRY_COUNT
-      user_message.increment!(:retry_count, touch: :retried_at)
+      user_message.increment!(:retry_count)
     else
       user_message.cancelled!
     end

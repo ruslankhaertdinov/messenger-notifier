@@ -13,5 +13,6 @@ class CreateUserMessages < ActiveRecord::Migration
     end
 
     add_index :user_messages, :uuid, using: :hash
+    add_index :user_messages, :status
   end
 end
