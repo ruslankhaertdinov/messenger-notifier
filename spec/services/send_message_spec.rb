@@ -12,7 +12,13 @@ describe SendMessage do
     context 'сообщение не в очереди на отправку' do
       let(:result) { true }
 
+      before do
+        user_message.sent!
+      end
+
       it 'не будет отправлять сообщение' do
+        service.call
+
         expect(WhatsApp::ApiStub).not_to have_received(:new)
       end
     end
