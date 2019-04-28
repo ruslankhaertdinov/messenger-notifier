@@ -7,5 +7,7 @@ Rails.application.routes.draw do
     devise_scope :user do
       post "users/sign_in", to: "sessions#create"
     end
+
+    resources :messages, only: %i[create]
   end
 end

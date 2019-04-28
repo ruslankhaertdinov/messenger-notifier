@@ -4,4 +4,4 @@
 
 require File.expand_path("config/application", __dir__)
 
-RailsBaseApi::Application.load_tasks
+MessengerNotifier::Application.load_tasks

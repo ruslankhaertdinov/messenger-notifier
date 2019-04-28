@@ -4,12 +4,13 @@ require File.expand_path("boot", __dir__)
 require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
+require "sprockets/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module RailsBaseApi
+module MessengerNotifier
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -27,12 +28,14 @@ module RailsBaseApi
     config.noreply = "noreply@fs-rails-base-api.heroku.com"
 
     # Default host for action mailer, initializers/mailer.rb
-    config.host = "localhost:5000"
+    config.host = "localhost:3000"
 
     config.serve_static_files = false
 
     # Disable default Rails headers which do not make sense in
     # API-only project (X-Frame-Options, X-XSS-Protection, X-Content-Type-Options)
     config.action_dispatch.default_headers = {}
+
+    config.autoload_paths += %W[#{ config.root }/app/]
   end
 end
