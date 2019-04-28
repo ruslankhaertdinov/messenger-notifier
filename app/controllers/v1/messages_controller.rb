@@ -1,7 +1,8 @@
 module V1
   class MessagesController < ApplicationController
     def create
-      result = SendMessage.call(params: strong_params)
+      byebug
+      result = HandleRequest.call(params: strong_params)
       if result.success?
         render json: { success: 'true' }
       else
@@ -13,12 +14,20 @@ module V1
 
     def strong_params
       # {
-      #   users: ['user1@example.com', 'user2@example.com'],
       #   message: 'Оплатить по счёту',
-      #   providers: ['whatsapp', 'viber'],
+      #   whats_app: ['9061111111'],
+      #   viber: ['9062222222'],
+      #   telegram: ['@username'],
       #   send_at: '2019-04-24T21:33:07+03:00'
       # }
-      params.permit(:message, :send_at, users: [], providers: [])
+      params.permit(:message, :send_at, **providers)
+    end
+
+    # { whats_app: [], viber: [], telegram: [] }
+    def providers
+      {}.tap do |opts|
+        ParamsForm::PROVIDERS.each { |provider| opts[provider] = [] }
+      end
     end
   end
 end
