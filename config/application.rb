@@ -34,5 +34,7 @@ module RailsBaseApi
     # Disable default Rails headers which do not make sense in
     # API-only project (X-Frame-Options, X-XSS-Protection, X-Content-Type-Options)
     config.action_dispatch.default_headers = {}
+
+    config.autoload_paths += %W[#{ config.root }/app/]
   end
 end

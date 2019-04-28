@@ -1,5 +1,5 @@
 class HandleMessage
-  include Interactor
+  include Interactor::Organizer
 
   delegate :message, :send_at, to: :context
 
