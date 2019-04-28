@@ -29,7 +29,7 @@
         "Content-Type": "application/json; charset=utf-8"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://localhost:5000/v1/messages\" -d 'message=hello&whats_app[]=9061111111&viber[]=9062222222&telegram[]=%40username' -X POST \\\n\t-H \"Accept: application/json\""
+      "curl": "curl \"http://localhost:3000/v1/messages\" -d 'message=hello&whats_app[]=9061111111&viber[]=9062222222&telegram[]=%40username' -X POST \\\n\t-H \"Accept: application/json\""
     }
   ]
 }

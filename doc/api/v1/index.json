@@ -1,19 +1,6 @@
 {
   "resources": [
     {
-      "name": "Errors",
-      "explanation": null,
-      "examples": [
-        {
-          "description": "Request to unexisting page",
-          "link": "errors/request_to_unexisting_page.json",
-          "groups": "all",
-          "route": "/not-found",
-          "method": "get"
-        }
-      ]
-    },
-    {
       "name": "Messages",
       "explanation": null,
       "examples": [
@@ -29,26 +16,6 @@
           "link": "messages/возврат_сообщения_об_ошибке_(invalid_params).json",
           "groups": "all",
           "route": "/v1/messages",
-          "method": "post"
-        }
-      ]
-    },
-    {
-      "name": "Sessions",
-      "explanation": null,
-      "examples": [
-        {
-          "description": "Sign in with valid password",
-          "link": "sessions/sign_in_with_valid_password.json",
-          "groups": "all",
-          "route": "/v1/users/sign_in",
-          "method": "post"
-        },
-        {
-          "description": "Sign in with invalid password",
-          "link": "sessions/sign_in_with_invalid_password.json",
-          "groups": "all",
-          "route": "/v1/users/sign_in",
           "method": "post"
         }
       ]

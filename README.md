@@ -11,14 +11,3 @@
 * `bin/setup` - первичная установка проекта
 * `bin/rails s` - запуск сервера
 * `bin/rspec` - запуск тестов
-
-## Быстрый старт
-
-Клонируем проекте себе
-
-```bash
-git clone git://github.com/ruslankhaertdinov/messenger-notifier.git
-cd messenger-notifier
-bin/setup
-bin/rails s
-```
