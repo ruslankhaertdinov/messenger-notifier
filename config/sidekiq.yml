@@ -1,0 +1,10 @@
+:concurrency: 5
+:pidfile: tmp/pids/sidekiq.pid
+:verbose: false
+:logfile: log/sidekiq.log
+:queues:
+  - default
+
+:schedule:
+  Schedule::SendMessagesWorker:
+    cron: '* * * * *'
