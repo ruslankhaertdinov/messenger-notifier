@@ -17,12 +17,8 @@ class SaveMessage
   def save_message
     ParamsForm::PROVIDERS.each do |provider|
       params[provider.to_s].to_a.each do |username|
-        user_message = UserMessage.create(
-                         username: username,
-                         provider: provider,
-                         message: params['message'],
-                         send_at: send_at
-                       )
+        message_params = { username: username, provider: provider, message: params['message'], send_at: send_at }
+        user_message = UserMessage.new(message_params)
         user_message.save || failed_params << "#{ provider }##{ username }: #{ user_message.errors.to_a.join(', ') }"
       end
     end
