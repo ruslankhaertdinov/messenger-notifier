@@ -1,5 +1,6 @@
 {
   "resource": "Messages",
+  "resource_explanation": null,
   "http_method": "POST",
   "route": "/v1/messages",
   "description": "возврат сообщения об ошибке",
@@ -52,7 +53,7 @@
       "request_content_type": "application/x-www-form-urlencoded",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"success\":\"false\",\"errors\":[\"Сообщение было сохранено ранее\"]}",
+      "response_body": "{\n  \"success\": \"false\",\n  \"errors\": [\n    \"Сообщение было сохранено ранее\"\n  ]\n}",
       "response_headers": {
         "Content-Type": "application/json; charset=utf-8"
       },

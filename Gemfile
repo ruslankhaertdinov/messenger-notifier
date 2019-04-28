@@ -36,7 +36,7 @@ end
 group :development, :test do
   gem "byebug"
   gem "dotenv-rails"
-  gem "rspec-rails"
+  gem "rspec-rails", "~> 3.5", ">= 3.5.2"
   gem "mail_safe"
 
   gem "brakeman"
@@ -58,5 +58,5 @@ group :development, :test, :staging do
   gem "faker"
   gem "factory_girl_rails"
   gem "rspec_api_documentation"
-  gem "apitome"
+  gem "apitome", '0.2.0'
 end
