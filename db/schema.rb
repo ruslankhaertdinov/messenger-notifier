@@ -11,10 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130319140714) do
+ActiveRecord::Schema.define(version: 20190428060635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "user_messages", force: :cascade do |t|
+    t.string   "username",                       null: false
+    t.string   "provider",                       null: false
+    t.string   "message",                        null: false
+    t.string   "uuid",                           null: false
+    t.string   "status",      default: "queued", null: false
+    t.integer  "retry_count", default: 0,        null: false
+    t.datetime "retried_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_messages", ["uuid"], name: "index_user_messages_on_uuid", using: :hash
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

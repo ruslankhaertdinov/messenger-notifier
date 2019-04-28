@@ -8,7 +8,19 @@ class SendMessageBase
   end
 
   def call
-    puts "#{ self.class }: message <#{ message }> sent to <#{ username }> at #{ Time.new.iso8601 }"
-    true
+    if response == true
+      puts "#{ self.class }##{ Time.new.iso8601 }: message <#{ message }> sent to <#{ username }>"
+      true
+    else
+      puts "#{ self.class }##{ Time.new.iso8601 }: message <#{ message }> not sent to <#{ username }>"
+      false
+    end
+  end
+
+  private
+
+  # заглушка
+  def response
+    [true, false].sample
   end
 end
