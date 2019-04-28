@@ -1,4 +1,4 @@
-class SendMessage
+class HandleMessage
   include Interactor
 
   delegate :message, :send_at, to: :context
