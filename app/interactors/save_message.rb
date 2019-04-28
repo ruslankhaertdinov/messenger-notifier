@@ -1,10 +1,15 @@
 class SaveMessage
   include Interactor
 
-  delegate :params, to: :context
+  delegate :params, :failed_params, to: :context
+
+  before do
+    context.failed_params = []
+  end
 
   def call
-    save_message || context.fail!(errors: 'Ошибка сохранения, повторите запрос позже')
+    save_message
+    context.fail!(errors: "Ошибка сохранения для #{ failed_params.join(', ') }") if failed_params.any?
   end
 
   private
@@ -12,12 +17,13 @@ class SaveMessage
   def save_message
     ParamsForm::PROVIDERS.each do |provider|
       params[provider.to_s].to_a.each do |username|
-        UserMessage.create(
-          username: username,
-          provider: provider,
-          message: params['message'],
-          send_at: send_at
-        )
+        user_message = UserMessage.create(
+                         username: username,
+                         provider: provider,
+                         message: params['message'],
+                         send_at: send_at
+                       )
+        user_message.save || failed_params << "#{ provider }##{ username }: #{ user_message.errors.to_a.join(', ') }"
       end
     end
   end

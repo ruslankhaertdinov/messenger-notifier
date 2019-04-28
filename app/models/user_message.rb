@@ -5,7 +5,7 @@ class UserMessage < ActiveRecord::Base
   enum status: { queued: 'queued', sent: 'sent', cancelled: 'cancelled' }
 
   validates :username, :message, :uuid, :provider, :status, presence: true
-  validates :uuid, uniqueness: true
+  validates :uuid, uniqueness: { message: 'сообщение было отправлено ранее' }
 
   private
 
