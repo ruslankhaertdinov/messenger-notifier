@@ -1,28 +1,32 @@
 class ParamsForm
   include ActiveModel::Validations
 
-  PROVIDERS = %w[whats_app viber telegram].freeze
+  PROVIDERS = %i[whats_app viber telegram].freeze
 
-  attr_reader :usernames, :providers, :message, :send_at
-  private :usernames, :providers, :message, :send_at
+  attr_reader :message, :send_at
+  attr_reader(*PROVIDERS)
+  private :message, :send_at
+  private(*PROVIDERS)
 
   def initialize(params)
-    @usernames = params[:usernames].to_a
-    @providers = params[:providers].to_a
     @message = params[:message]
     @send_at = params[:send_at]
+
+    PROVIDERS.each do |provider|
+      instance_variable_set("@#{ provider }", params[provider].to_a)
+    end
   end
 
-  validates :usernames, :providers, :message, presence: true
-  validate :providers_list
+  validates :message, presence: true
+  validate :usernames_list
   validate :send_at_format
 
   private
 
-  def providers_list
-    return if providers.all? { |provider| provider.in?(PROVIDERS) }
+  def usernames_list
+    return if PROVIDERS.any? { |provider| send(provider).any? }
 
-    errors.add(:providers, "Допустимы только значения из списка: #{ PROVIDERS }")
+    errors.add(:usernames, 'Список получателей не может быть пустым')
   end
 
   def send_at_format
