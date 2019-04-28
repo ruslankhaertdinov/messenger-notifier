@@ -1,5 +1,5 @@
 class UserMessage < ActiveRecord::Base
-  before_validation :set_uuid
+  before_validation :set_uuid, :set_send_at
 
   enum provider: { whats_app: 'whats_app', viber: 'viber', telegram: 'telegram' }
   enum status: { queued: 'queued', sent: 'sent', cancelled: 'cancelled' }
@@ -14,5 +14,9 @@ class UserMessage < ActiveRecord::Base
   def set_uuid
     string = [username, provider, message].join
     self.uuid = Digest::SHA256.hexdigest(string)
+  end
+
+  def set_send_at
+    self.send_at ||= Time.new.utc.iso8601
   end
 end

@@ -6,9 +6,8 @@ describe ValidateParams do
   context 'параметры валидные' do
     let(:params) do
       {
-        usernames: %w[@david],
-        message: 'Привет',
-        providers: %w[whats_app]
+        telegram: %w[@david],
+        message: 'Привет'
       }
     end
 
