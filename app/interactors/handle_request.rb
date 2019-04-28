@@ -1,5 +1,5 @@
 class HandleRequest
   include Interactor::Organizer
 
-  organize ValidateParams, SaveMessages
+  organize ValidateParams, SaveMessage
 end

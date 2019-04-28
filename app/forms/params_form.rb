@@ -1,7 +1,7 @@
 class ParamsForm
   include ActiveModel::Validations
 
-  PROVIDERS = %w[whats_app viber telegramm].freeze
+  PROVIDERS = %w[whats_app viber telegram].freeze
 
   attr_reader :usernames, :providers, :message, :send_at
   private :usernames, :providers, :message, :send_at

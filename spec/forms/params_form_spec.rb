@@ -8,7 +8,7 @@ describe ParamsForm do
       {
         usernames: %w[@david],
         message: 'Привет',
-        providers: %w[whats_app viber telegramm],
+        providers: %w[whats_app viber telegram],
         send_at: '2019-04-28T13:55:33+03:00'
       }
     end
@@ -23,7 +23,7 @@ describe ParamsForm do
       {
         usernames: [],
         message: '',
-        providers: %w[whats_app viber telegramm wrong_provider],
+        providers: %w[whats_app viber telegram wrong_provider],
         send_at: 'wrong_date'
       }
     end
@@ -31,7 +31,7 @@ describe ParamsForm do
     it 'вернёт сообщение об ошибке' do
       expect(form).not_to be_valid
       expect(form.errors[:usernames]).to eq(["can't be blank"])
-      expect(form.errors[:providers]).to eq(['Допустимы только значения из списка: ["whats_app", "viber", "telegramm"]'])
+      expect(form.errors[:providers]).to eq(['Допустимы только значения из списка: ["whats_app", "viber", "telegram"]'])
       expect(form.errors[:message]).to eq(["can't be blank"])
       expect(form.errors[:send_at]).to eq(["Время отправки должно быть в формате ISO8601"])
     end

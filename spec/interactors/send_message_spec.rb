@@ -5,7 +5,7 @@ describe SendMessage do
   let!(:user) { create(:user) }
   let!(:provider1) { create(:provider, :whats_app) }
   let!(:provider2) { create(:provider, :viber) }
-  let!(:provider3) { create(:provider, :telegramm) }
+  let!(:provider3) { create(:provider, :telegram) }
   let!(:providers_user1) { create(:providers_user, user: user, provider: provider1, username: '@username1') }
   let!(:providers_user2) { create(:providers_user, user: user, provider: provider2, username: '@username2') }
   let!(:providers_user3) { create(:providers_user, user: user, provider: provider3, username: '@username3') }
@@ -13,12 +13,12 @@ describe SendMessage do
     {
       message: 'Hi!',
       users: [user.email],
-      providers: ['whats_app', 'telegramm', 'viber']
+      providers: ['whats_app', 'telegram', 'viber']
     }
   end
 
   it 'отправит уведомления' do
-    [WhatsApp::SendMessage, Viber::SendMessage, Telegramm::SendMessage].each do |klass|
+    [WhatsApp::SendMessage, Viber::SendMessage, Telegram::SendMessage].each do |klass|
       expect(klass).to receive_message_chain(:new, :call)
     end
 

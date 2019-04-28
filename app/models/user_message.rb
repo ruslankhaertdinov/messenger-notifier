@@ -1,7 +1,7 @@
 class UserMessage < ActiveRecord::Base
   before_validation :set_uuid
 
-  enum provider: { whats_app: 'whats_app', viber: 'viber', telegramm: 'telegramm' }
+  enum provider: { whats_app: 'whats_app', viber: 'viber', telegram: 'telegram' }
   enum status: { queued: 'queued', sent: 'sent', cancelled: 'cancelled' }
 
   validates :username, :message, :uuid, :provider, :status, presence: true

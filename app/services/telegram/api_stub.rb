@@ -1,5 +1,5 @@
 # заглушка интеграции с сервисом
-module Telegramm
+module Telegram
   class ApiStub
     def call
       [true, false].sample

@@ -11,7 +11,7 @@ resource "Messages" do
     let!(:user2) { create :user, email: 'user2@example.com' }
     let!(:provider1) { create(:provider, :whats_app) }
     let!(:provider2) { create(:provider, :viber) }
-    let!(:provider3) { create(:provider, :telegramm) }
+    let!(:provider3) { create(:provider, :telegram) }
     let!(:providers_user1) { create(:providers_user, user: user1, provider: provider1, username: 'username1') }
     let!(:providers_user2) { create(:providers_user, user: user1, provider: provider2, username: 'username2') }
     let!(:providers_user3) { create(:providers_user, user: user1, provider: provider3, username: 'username3') }
@@ -31,7 +31,7 @@ resource "Messages" do
                         comment: 'В формате iso8601, например: 2019-04-27T14:08:25+03:00'
     parameter :providers, 'Список мессенджеров',
                           type: :array,
-                          comment: 'Пример: [whats_app, viber, telegramm]',
+                          comment: 'Пример: [whats_app, viber, telegram]',
                           required: true
     parameter :users, 'Список эл. адресов пользователей',
                       type: :array,
