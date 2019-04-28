@@ -23,8 +23,7 @@ ActiveRecord::Schema.define(version: 20190428060635) do
     t.string   "uuid",                           null: false
     t.string   "status",      default: "queued", null: false
     t.integer  "retry_count", default: 0,        null: false
-    t.datetime "retried_at"
-    t.datetime "send_at"
+    t.datetime "send_at",                        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -7,8 +7,7 @@ class CreateUserMessages < ActiveRecord::Migration
       t.string :uuid, null: false
       t.string :status, null: false, default: 'queued'
       t.integer :retry_count, null: false, default: 0
-      t.datetime :retried_at
-      t.datetime :send_at
+      t.datetime :send_at, null: false
       t.timestamps
     end
 

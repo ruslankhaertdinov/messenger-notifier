@@ -4,7 +4,7 @@ class UserMessage < ActiveRecord::Base
   enum provider: { whats_app: 'whats_app', viber: 'viber', telegram: 'telegram' }
   enum status: { queued: 'queued', sent: 'sent', cancelled: 'cancelled' }
 
-  validates :username, :message, :uuid, :provider, :status, presence: true
+  validates :username, :message, :uuid, :provider, :status, :send_at, presence: true
   validates :uuid, uniqueness: { message: 'сообщение было отправлено ранее' }
 
   scope :actual, -> { where('user_messages.send_at <= ?', Time.new.utc.iso8601) }
