@@ -25,6 +25,8 @@ class SaveMessage
   end
 
   def send_at
-    @send_at ||= params[:send_at].presence || Time.current.iso8601
+    given_time = params[:send_at]
+    utc_time = given_time.present? ? DateTime.parse(given_time).utc.iso8601 : Time.new.utc.iso8601
+    @send_at ||= utc_time
   end
 end

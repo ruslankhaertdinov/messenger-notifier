@@ -7,6 +7,8 @@ class UserMessage < ActiveRecord::Base
   validates :username, :message, :uuid, :provider, :status, presence: true
   validates :uuid, uniqueness: { message: 'сообщение было отправлено ранее' }
 
+  scope :actual, -> { where('user_messages.send_at <= ?', Time.new.utc.iso8601) }
+
   private
 
   def set_uuid
