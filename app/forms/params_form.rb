@@ -7,8 +7,8 @@ class ParamsForm
   private :usernames, :providers, :message, :send_at
 
   def initialize(params)
-    @usernames = params[:usernames]
-    @providers = params[:providers]
+    @usernames = params[:usernames].to_a
+    @providers = params[:providers].to_a
     @message = params[:message]
     @send_at = params[:send_at]
   end

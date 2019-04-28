@@ -4,12 +4,14 @@ class ValidateParams
   delegate :params, to: :context
 
   def call
-    context.fail!('Invalid params!') if form.invalid?
+    return if form.valid?
+
+    context.fail!(errors: form.errors.messages)
   end
 
   private
 
   def form
-
+    @form ||= ParamsForm.new(params)
   end
 end
