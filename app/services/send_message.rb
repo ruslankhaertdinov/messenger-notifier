@@ -39,7 +39,8 @@ class SendMessage
   end
 
   def message_to_logger(verb)
-    string = "#{ self.class }##{ Time.new.iso8601 }: message <#{ message }> #{ verb } to <#{ username }>"
+    current_time = Time.new.utc.strftime('%d-%m-%Y %H:%M:%S')
+    string = "#{ self.class } (#{ current_time }): message '#{ message }' #{ verb } to '#{ provider }/#{ username }'"
     puts string
     Rails.logger.warn(string)
   end

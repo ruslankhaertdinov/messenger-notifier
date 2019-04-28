@@ -7,29 +7,32 @@ resource "Messages" do
   post "/v1/messages" do
     let(:params) do
       {
-        message: 'Оплатить по счёту',
+        message: 'hello',
         whats_app: ['9061111111'],
         viber: ['9062222222'],
         telegram: ['@username']
       }
     end
 
-    parameter :message, 'Сообщение', type: :string, required: true
-    parameter :send_at, 'Желаемое время отправки (отправляется немедленно, если не передано)',
-                        type: :string,
-                        comment: 'В формате iso8601, например: 2019-04-27T14:08:25+03:00'
-    parameter :whats_app, 'Список идендификаторов пользователей для платформы WhatsApp',
-                          type: :array,
-                          comment: "Пример: { 'whats_app' => ['9061111111'] }"
-    parameter :viber, 'Список идендификаторов пользователей для платформы Viber',
-                          type: :array,
-                          comment: "Пример: { 'viber' => ['90622222222'] }"
-    parameter :telegram, 'Список идендификаторов пользователей для платформы Telegram',
-                          type: :array,
-                          comment: "Пример: { 'telegram' => ['90622222222'] }"
-
     context 'валидные параметры' do
-      example_request "успешная обработка запроса" do
+      parameter :message, 'Сообщение', type: :string, required: true
+      parameter :send_at, 'Желаемое время отправки (отправляется немедленно, если не передано)',
+                          type: :string,
+                          comment: 'В формате iso8601, например: 2019-04-27T14:08:25+03:00'
+      parameter :whats_app, 'Список идендификаторов пользователей для платформы WhatsApp',
+                            type: :array,
+                            comment: "Пример: { 'whats_app' => ['9061111111'] }",
+                            required: true
+      parameter :viber, 'Список идендификаторов пользователей для платформы Viber',
+                            type: :array,
+                            comment: "Пример: { 'viber' => ['90622222222'] }",
+                            required: true
+      parameter :telegram, 'Список идендификаторов пользователей для платформы Telegram',
+                            type: :array,
+                            comment: "Пример: { 'telegram' => ['90622222222'] }",
+                            required: true
+
+      example_request "успешная обработка запроса (valid params)" do
         expect(response_body['success']).to eq('success')
       end
     end
@@ -42,7 +45,7 @@ resource "Messages" do
         allow(HandleRequest).to receive(:call).and_return(result)
       end
 
-      example_request "возврат сообщения об ошибке" do
+      example_request "возврат сообщения об ошибке (invalid params)" do
         expect(json_response_body['errors']).to contain_exactly(message)
       end
     end

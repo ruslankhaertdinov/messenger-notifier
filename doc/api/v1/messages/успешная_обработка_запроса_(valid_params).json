@@ -3,7 +3,7 @@
   "resource_explanation": null,
   "http_method": "POST",
   "route": "/v1/messages",
-  "description": "успешная обработка запроса",
+  "description": "успешная обработка запроса (valid params)",
   "explanation": null,
   "parameters": [
     {
@@ -21,18 +21,21 @@
     {
       "type": "array",
       "comment": "Пример: { 'whats_app' => ['9061111111'] }",
+      "required": true,
       "name": "whats_app",
       "description": "Список идендификаторов пользователей для платформы WhatsApp"
     },
     {
       "type": "array",
       "comment": "Пример: { 'viber' => ['90622222222'] }",
+      "required": true,
       "name": "viber",
       "description": "Список идендификаторов пользователей для платформы Viber"
     },
     {
       "type": "array",
       "comment": "Пример: { 'telegram' => ['90622222222'] }",
+      "required": true,
       "name": "telegram",
       "description": "Список идендификаторов пользователей для платформы Telegram"
     }
@@ -44,7 +47,7 @@
     {
       "request_method": "POST",
       "request_path": "/v1/messages",
-      "request_body": "message=%D0%9E%D0%BF%D0%BB%D0%B0%D1%82%D0%B8%D1%82%D1%8C+%D0%BF%D0%BE+%D1%81%D1%87%D1%91%D1%82%D1%83&whats_app[]=9061111111&viber[]=9062222222&telegram[]=%40username",
+      "request_body": "message=hello&whats_app[]=9061111111&viber[]=9062222222&telegram[]=%40username",
       "request_headers": {
         "Accept": "application/json"
       },
@@ -58,7 +61,7 @@
         "Content-Type": "application/json; charset=utf-8"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://localhost:5000/v1/messages\" -d 'message=%D0%9E%D0%BF%D0%BB%D0%B0%D1%82%D0%B8%D1%82%D1%8C+%D0%BF%D0%BE+%D1%81%D1%87%D1%91%D1%82%D1%83&whats_app[]=9061111111&viber[]=9062222222&telegram[]=%40username' -X POST \\\n\t-H \"Accept: application/json\""
+      "curl": "curl \"http://localhost:5000/v1/messages\" -d 'message=hello&whats_app[]=9061111111&viber[]=9062222222&telegram[]=%40username' -X POST \\\n\t-H \"Accept: application/json\""
     }
   ]
 }

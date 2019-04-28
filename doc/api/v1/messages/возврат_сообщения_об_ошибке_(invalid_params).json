@@ -1,0 +1,35 @@
+{
+  "resource": "Messages",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "/v1/messages",
+  "description": "возврат сообщения об ошибке (invalid params)",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/v1/messages",
+      "request_body": "message=hello&whats_app[]=9061111111&viber[]=9062222222&telegram[]=%40username",
+      "request_headers": {
+        "Accept": "application/json"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"success\": \"false\",\n  \"errors\": [\n    \"Сообщение было сохранено ранее\"\n  ]\n}",
+      "response_headers": {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://localhost:5000/v1/messages\" -d 'message=hello&whats_app[]=9061111111&viber[]=9062222222&telegram[]=%40username' -X POST \\\n\t-H \"Accept: application/json\""
+    }
+  ]
+}

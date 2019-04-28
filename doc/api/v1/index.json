@@ -18,15 +18,15 @@
       "explanation": null,
       "examples": [
         {
-          "description": "успешная обработка запроса",
-          "link": "messages/успешная_обработка_запроса.json",
+          "description": "успешная обработка запроса (valid params)",
+          "link": "messages/успешная_обработка_запроса_(valid_params).json",
           "groups": "all",
           "route": "/v1/messages",
           "method": "post"
         },
         {
-          "description": "возврат сообщения об ошибке",
-          "link": "messages/возврат_сообщения_об_ошибке.json",
+          "description": "возврат сообщения об ошибке (invalid params)",
+          "link": "messages/возврат_сообщения_об_ошибке_(invalid_params).json",
           "groups": "all",
           "route": "/v1/messages",
           "method": "post"
