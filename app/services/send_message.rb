@@ -4,7 +4,7 @@ class SendMessage
 
   MAX_RETRY_COUNT = 10
 
-  delegate :message, :username, to: :user_message
+  delegate :message, :username, :provider, to: :user_message
 
   def initialize(user_message)
     @user_message = user_message
@@ -17,7 +17,8 @@ class SendMessage
   private
 
   def response
-    MessengerApiStub.new.result
+    klass = "#{ provider }/api_stub".classify.constantize
+    klass.new(username, message).call
   end
 
   def act_on_success

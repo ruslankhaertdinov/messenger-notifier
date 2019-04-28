@@ -5,7 +5,7 @@ describe SendMessage do
   let!(:user_message) { create(:user_message, username: '@username', provider: 'whats_app', message: 'Привет') }
 
   before do
-    allow(MessengerApiStub).to receive_message_chain(:new, :result).and_return(result)
+    allow(WhatsApp::ApiStub).to receive_message_chain(:new, :call).and_return(result)
   end
 
   describe '#call' do
