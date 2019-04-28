@@ -11,6 +11,21 @@
       ]
     },
     {
+      "name": "Messages",
+      "examples": [
+        {
+          "description": "успешная обработка запроса",
+          "link": "messages/успешная_обработка_запроса.json",
+          "groups": "all"
+        },
+        {
+          "description": "возврат сообщения об ошибке",
+          "link": "messages/возврат_сообщения_об_ошибке.json",
+          "groups": "all"
+        }
+      ]
+    },
+    {
       "name": "Sessions",
       "examples": [
         {

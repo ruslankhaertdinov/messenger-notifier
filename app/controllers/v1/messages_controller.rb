@@ -1,7 +1,6 @@
 module V1
   class MessagesController < ApplicationController
     def create
-      byebug
       result = HandleRequest.call(params: strong_params)
       if result.success?
         render json: { success: 'true' }
