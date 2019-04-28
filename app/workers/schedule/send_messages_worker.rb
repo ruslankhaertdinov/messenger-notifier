@@ -1,4 +1,6 @@
-module Schedules
+require 'sidekiq-scheduler'
+
+module Schedule
   class SendMessagesWorker
     include Sidekiq::Worker
     sidekiq_options retry: false

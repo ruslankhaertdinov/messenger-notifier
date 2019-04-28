@@ -20,7 +20,9 @@ class SendMessage
 
   def response
     klass = "#{ provider }/api_stub".classify.constantize
-    klass.new(username, message).call
+    r = klass.new(username, message).call
+    puts r
+    r
   end
 
   def act_on_success
