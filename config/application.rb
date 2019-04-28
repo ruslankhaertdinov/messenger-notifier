@@ -28,7 +28,7 @@ module MessengerNotifier
     config.noreply = "noreply@fs-rails-base-api.heroku.com"
 
     # Default host for action mailer, initializers/mailer.rb
-    config.host = "localhost:5000"
+    config.host = "localhost:3000"
 
     config.serve_static_files = false
 
